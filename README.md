@@ -19,7 +19,7 @@ This is an app made to allow university students keep track interpret their seme
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Language:** Python 3
 - **Interface:** Command Line (CLI)
