@@ -1,12 +1,12 @@
 #Preferred grading system
 import time
+import sys
 
 
 
 #main menu
 def main_menu():
     print("Student Grading System")
-    print("Select an option from the menu below:")
     print(" 1. Interpret results")
     print(" 2. Quit")
 
@@ -46,6 +46,12 @@ def return_menu():
 
 #quit
 def quit_app():
+    print("Program quit successful!")
+    sys.exit()
+
+
+
+def delay():
     pass
 
 
