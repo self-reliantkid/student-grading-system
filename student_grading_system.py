@@ -1,5 +1,20 @@
+#Calculation of grade point per course.
+
 import time
 import sys
+
+
+#grade point scale
+grade_scale = {
+    "A": 4.0,
+    "B+": 3.5,
+    "B": 3.0,
+    "C+": 2.5,
+    "C": 2.0,
+    "D": 1.5,
+    "E": 1.0,
+    "F": 0.0
+    }
 
 
 
@@ -14,9 +29,10 @@ def main_menu():
 
         if user_choice in range(1, 3):
             if user_choice == 1:
+                time.sleep(0.5)
                 running_menu()
             else:
-                quit_app()    
+                quit_app()
         else:
             print("Option not in menu. Try again!\n\n")
             time.sleep(0.8)
@@ -65,7 +81,6 @@ def running_menu():
 
 
 
-
 def course_menu(n):
     sem_count = 1 #semester count
     year_count = 1 #year count
@@ -90,6 +105,14 @@ def course_menu(n):
     year_count = 1
 
     for courses in courses_taken:
+        global credits
+        global grades
+        global grade_points
+
+        credits = []
+        grades = []
+        grade_points = []
+
 
         sem_track = 2 if (sem_count%2 == 0) else 1
 
@@ -104,12 +127,13 @@ def course_menu(n):
         if sem_track == 2:
             year_count += 1
 
+        calc_gpa(credits, grade_points)
 
 
-def grades_menu():
-    credits = []
-    grades = []
 
+#grades menu
+def grades_menu(): 
+    #course details
     try:
         course_name = input("Course Name: ")
         credit_hours = int(input("Number of credit hours: "))
@@ -119,29 +143,86 @@ def grades_menu():
         time.sleep(0.8)
         course_menu(sems)
 
+    credits.append(credit_hours)
+
+    #convert raw results to grade point
+    if course_grade in range(80, 101):
+        grade_points.append(grade_scale["A"])
+    elif course_grade in range(75, 80):
+        grade_points.append(grade_scale["B+"])
+    elif course_grade in range(70, 75):
+        grade_points.append(grade_scale["B"])
+    elif course_grade in range(65, 70):
+        grade_points.append(grade_scale["C+"])
+    elif course_grade in range(60, 65):
+        grade_points.append(grade_scale["C"])
+    elif course_grade in range(50, 60):
+        grade_points.append(grade_scale["D"])
+    elif course_grade in range(45, 50):
+        grade_points.append(grade_scale["E"])
+    else:
+        grade_points.append(grade_scale["F"])
+
+    grades.append(course_grade)
+    
 
 
-def calc_gpa():
-    pass
+#calculate gpa
+def calc_gpa(ch, gpp):
+    cred_x_grd_pnt = []
+
+    #take credit hour and corresponding grade point
+    for c, gp in zip(ch, gpp):
+        cred_x_grd_pnt.append(c * gp)
+
+    gpa = sum(cred_x_grd_pnt)/sum(ch)
+    print(f"\nYour GPA for this semester is {gpa}!")
 
 
 
 #return menu
 def return_menu():
-    pass
+    print("\nReturn to main menu?")
+    print(" 1. Yes")
+    print(" 2. Quit")
+
+    try:
+        user_choice = int(input("\nYour choice: "))
+
+        if user_choice in range(1, 3):
+            if user_choice == 1:
+                time.sleep(0.8)
+                main_menu()
+            else:
+                quit()
+        else:
+            print("\nOption not in menu! Try again.")
+            time.sleep(0.3)
+            return_menu()
+    
+    except ValueError:
+        print("\nInvalid input! Kindly try again.")
+        time.sleep(0.8)
+        return_menu()
 
 
 
 #quit
 def quit_app():
+    print("\nQuitting program", end="")
     delay()
     print("Program quit successful!")
     sys.exit()
 
 
 
+#delay
 def delay():
-    pass
+    for _ in range(6):
+        print(".", end="", flush=True)
+        time.sleep(0.5)
+    print("")
+    time.sleep(0.6)
 
 
 
