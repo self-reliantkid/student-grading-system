@@ -11,11 +11,17 @@ grade_scale = {
     "B": 3.0,
     "C+": 2.5,
     "C": 2.0,
+    "D+": 1.5,
     "D": 1.5,
-    "E": 1.0,
+    "E": 0.5,
     "F": 0.0
     }
 
+
+global gpas
+global was
+gpas = []
+was = []
 
 
 #main menu
@@ -128,6 +134,15 @@ def course_menu(n):
             year_count += 1
 
         calc_gpa(credits, grade_points)
+        calc_wa(credits, grades)
+
+    print("Validating user responses", end="")
+    delay()
+    print("Processing user data", end="")
+    delay(9)
+    print("Details successfully captured!")
+
+    grading_system_menu()
 
 
 
@@ -156,7 +171,9 @@ def grades_menu():
         grade_points.append(grade_scale["C+"])
     elif course_grade in range(60, 65):
         grade_points.append(grade_scale["C"])
-    elif course_grade in range(50, 60):
+    elif course_grade in range(55, 60):
+        grade_points.append(grade_scale["D+"])
+    elif course_grade in range(50, 55):
         grade_points.append(grade_scale["D"])
     elif course_grade in range(45, 50):
         grade_points.append(grade_scale["E"])
@@ -165,6 +182,33 @@ def grades_menu():
 
     grades.append(course_grade)
     
+
+
+#menu for grading system type
+def grading_system_menu():
+    print("\nSelect preferred grading system:")
+    print(" 1. Cumulative Grade Point Average (CGPA)")
+    print(" 2. Cumulative Weighted Average (CWA)")
+
+    try:
+        user_choice = int(input("\nYour choice: "))
+        if user_choice == 1:
+            calc_cgpa()
+            time.sleep(0.8)
+            return_menu()
+        elif user_choice == 2:
+            calc_cwa()
+            time.sleep(0.8)
+            return_menu()
+        else:
+            print("Kindly select an option from the menu\n")
+            time.sleep(0.5)
+            grading_system_menu()
+    except ValueError:
+        print("Invalid input! Kindly try again.\n")
+        time.sleep(0.5)
+        grading_system_menu()
+
 
 
 #calculate gpa
@@ -176,7 +220,48 @@ def calc_gpa(ch, gpp):
         cred_x_grd_pnt.append(c * gp)
 
     gpa = sum(cred_x_grd_pnt)/sum(ch)
-    print(f"\nYour GPA for this semester is {gpa}!")
+    gpas.append(gpa)
+
+
+
+#calculation of cgpa
+def calc_cgpa():
+    print("")
+
+    for i, x in enumerate(gpas, start=1):
+        time.sleep(0.2)
+        print(f"Sem{i} GPA: {x:.2f}")
+    
+    cgpa = sum(gpas)/len(gpas)
+    time.sleep(0.4)
+    print(f"Your CGPA is: {cgpa:.2f}")
+
+
+
+#calculate wa
+def calc_wa(ch, gr):
+    global cred_x_weight
+    cred_x_weight = []
+
+    for c, w in zip(ch, gr):
+        cred_x_weight.append(c * w)
+
+    wa = sum(cred_x_weight)/sum(ch)
+    was.append(wa)
+
+
+
+#calculation of cwa
+def calc_cwa():
+    print("")
+
+    for i, x in enumerate(was, start=1):
+        time.sleep(0.2)
+        print(f"Sem{i} WA: {x:.2f}")
+    
+    cwa = sum(cred_x_weight)/sum(credits)
+    time.sleep(0.4)
+    print(f"\NYour CWA is: {cwa:.2f}")
 
 
 
@@ -191,6 +276,7 @@ def return_menu():
 
         if user_choice in range(1, 3):
             if user_choice == 1:
+                print("\n")
                 time.sleep(0.8)
                 main_menu()
             else:
@@ -217,8 +303,8 @@ def quit_app():
 
 
 #delay
-def delay():
-    for _ in range(6):
+def delay(n=6):
+    for _ in range(n):
         print(".", end="", flush=True)
         time.sleep(0.5)
     print("")
