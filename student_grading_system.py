@@ -28,15 +28,19 @@ was = []
 def main_menu():
     print("Student Grading System")
     print(" 1. Interpret results")
-    print(" 2. Quit")
+    print(" 2. Convert results to another grading system")
+    print(" 3. Quit")
 
     try:
         user_choice = int(input("\nYour choice: "))
 
-        if user_choice in range(1, 3):
+        if user_choice in range(1, 4):
             if user_choice == 1:
                 time.sleep(0.5)
                 running_menu()
+            elif user_choice == 2:
+                time.sleep(0.5)
+                convert_menu()
             else:
                 quit_app()
         else:
@@ -261,7 +265,7 @@ def calc_cwa():
     
     cwa = sum(cred_x_weight)/sum(credits)
     time.sleep(0.4)
-    print(f"\NYour CWA is: {cwa:.2f}")
+    print(f"\nYour CWA is: {cwa:.2f}")
 
 
 
@@ -290,6 +294,56 @@ def return_menu():
         print("\nInvalid input! Kindly try again.")
         time.sleep(0.8)
         return_menu()
+
+
+#conversion between GPA and CWA
+def convert_menu():
+    print("\nGrade Conversion")
+    print(" 1. CGPA to CWA")
+    print(" 2. CWA to CGPA")
+
+    try:
+        user_choice = int(input("\nYour choice: "))
+
+        if user_choice in range(1, 3):
+            if user_choice == 1:
+                cgpa_to_cwa()
+            else:
+                cwa_to_gpa()
+        else:
+            print("Option not in menu. Try again!")
+            time.sleep(0.5)
+            convert_menu()
+    except ValueError:
+        print("Invalid input! Kindly try again.")
+        time.sleep(0.8)
+        convert_menu()
+
+
+
+#conversion from cgpa to cwa
+def cgpa_to_cwa():
+    value = float(input("\nEnter CGPA: "))
+    to_cwa = (value*100)/4
+    time.sleep(0.6)
+    print("\nProcessing", end="")
+    delay()
+    print(f"A CGPA of {value} corresponds to {to_cwa:.2f}CWA")
+    time.sleep(0.8)
+    return_menu()
+
+
+
+#conversion from cwa to gpa
+def cwa_to_gpa():
+    value = float(input("\nEnter CWA: "))
+    to_gpa = (value/100) * 4.0
+    time.sleep(0.6)
+    print("\nProcessing", end="")
+    delay()
+    print(f"A CWA of {value} corresponds to {to_gpa:.2f}GPA.")
+    time.sleep(0.8)
+    return_menu()
 
 
 
