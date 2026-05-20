@@ -18,7 +18,7 @@ def view_records(info):
 
             for det in info[year][sem]:
                 print(det["name"], end=" | ")
-                print(f"Credit hours: {det["credits"]}", end=" | ")
-                print(f"Grade: {det["grades"]}")
+                print(f"Credit hours: {det['credits']}", end=" | ")
+                print(f"Grade: {det['grades']}")
     
         
