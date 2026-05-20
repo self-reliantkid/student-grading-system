@@ -14,7 +14,7 @@ def view_records(info):
     print("\nYour Records")
     for year in info.keys():
         for sem in info[year]:
-            print(f"\n{" ".join(year.split("_")).title()}, {"ester ".join(sem.split("_")).title()}")
+            print(f"\n{' '.join(year.split('_').title())}, {'ester '.join(sem.split('_')).title()}")
 
             for det in info[year][sem]:
                 print(det["name"], end=" | ")
