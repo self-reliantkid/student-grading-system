@@ -5,6 +5,8 @@ This is an app made to allow university students keep track and interpret their 
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat)
 ![Last Commit](https://img.shields.io/github/last-commit/self-reliantkid/student-grading-system?style=flat)
+![CI](https://github.com/self-reliantkid/student-grading-system/actions/workflows/ci.yml/badge.svg)
+
 
 
 ## Table of Contents
@@ -19,11 +21,13 @@ This is an app made to allow university students keep track and interpret their 
 - [License](#license)
 
 
+
 ## Features
 - Add courses with credit hours and grades
 - Calculate CWA (Cumulative Weighted Average)
 - Calculate CGPA (Cumulative Grade Point Average)
 - View semester-by-semester breakdown
+
 
 
 ## Demo
@@ -32,7 +36,7 @@ This is an app made to allow university students keep track and interpret their 
 
 ## Getting Started
 ### Prerequisities
-- Python 3.8 or higher
+- Python 3.11 or higher
 - Git 
 
 ### Installation
@@ -48,20 +52,19 @@ cd student-grading-system
 ```
 
 Run the app
-
-Windows
 ```
-python main.py
+python main.py      #Windows
 ```
 
-MacOS/Linux
 ```
-python3 main.py
+python3 main.py     #MacOS/Linux
 ```
+
 
 
 ## Usage
 Check back later
+
 
 
 ## Project Structure
@@ -76,8 +79,10 @@ student-grading-system/
 ```
 
 
+
 ## Roadmap
 More features coming soon
+
 
 
 ## Tech Stack
@@ -85,9 +90,11 @@ More features coming soon
 - **Interface:** Command Line (CLI)
 
 
+
 ## Author
 - **GitHub:** [@self-reliantkid](https://github.com/self-reliantkid)
 - **LinkedIn:** [Senanu Folikumah](https://linkedin.com/in/senanu-folikumah)
+
 
 
 ## License
